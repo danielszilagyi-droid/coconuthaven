@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniel's Coconut Haven</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: Georgia, serif;
+            background-color: #fdf6e3;
+            color: #5c4033;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .hero-image {
+            width: 90%;
+            max-width: 700px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            font-family: Georgia, serif;
+            font-size: 1.4rem;
+            padding: 14px 48px;
+            background-color: #2e8b57;
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .cta-button:hover {
+            background-color: #236b43;
+            transform: scale(1.05);
+        }
+
+        .cta-button:active {
+            transform: scale(0.97);
+        }
+
+        .emoji {
+            position: fixed;
+            top: -60px;
+            font-size: 2.5rem;
+            pointer-events: none;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg);
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Daniel's Coconut Haven</h1>
+
+    <img
+        class="hero-image"
+        src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=80"
+        alt="Tropical island with palm trees and sandy beach"
+    />
+
+    <button class="cta-button" onclick="dropCoconuts()">🥥 Coconuts 🥥</button>
+
+    <script>
+        function dropCoconuts() {
+            var emojis = ['🌴', '🥥', '🌴', '🥥', '🌴', '🥥'];
+            var totalEmojis = 30;
+
+            for (var i = 0; i < totalEmojis; i++) {
+                var emoji = document.createElement('div');
+                emoji.classList.add('emoji');
+                emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+
+                emoji.style.left = Math.random() * 100 + 'vw';
+
+                var size = 1.5 + Math.random() * 2;
+                emoji.style.fontSize = size + 'rem';
+
+                var duration = 2 + Math.random() * 3;
+                var delay = Math.random() * 1.5;
+                emoji.style.animationDuration = duration + 's';
+                emoji.style.animationDelay = delay + 's';
+
+                document.body.appendChild(emoji);
+
+                (function(el, dur, del) {
+                    setTimeout(function() {
+                        el.remove();
+                    }, (dur + del) * 1000 + 200);
+                })(emoji, duration, delay);
+            }
+        }
+    </script>
+</body>
+</html>
